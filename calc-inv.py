@@ -40,15 +40,13 @@ def main():
     arq_sea_mask = '/home/cruman/projects/rrg-sushama-ab/teufel/PanArctic_0.5d_ERAINT_NOCTEM_RUN/Analysis/anal_PanArctic_0.5d_ERAINT_NOCTEM_RUN_1980010100'
 
     with RPN(arq_sea_mask) as r:
-      sea_mask = np.squeeze(r.variables["I6"][:]) # values == 0 equals the sea
-
-    print(sea_mask.shape)
+      sea_mask = np.squeeze(r.variables["I6"][:])[13:-13, 13:-13] # values == 0 equals the sea
+    
     sea_mask[sea_mask > 0] = 1
-    print(sea_mask)
-    sys.exit()
+    
 
     main_folder = "/home/cruman/projects/rrg-sushama-ab/teufel/{0}".format(exp[0])
-    deltaT_R1 = calcInversions(exp[0], datai, dataf, main_folder)
+    deltaT_R1 = calcInversions(exp[0], datai, dataf, main_folder, sea_mask)
     #deltaT_R2 = calcInversions(exp[1], datai, dataf, main_folder)
     #deltaT_R3 = calcInversions(exp[2], datai, dataf, main_folder)
     #deltaT_R4 = calcInversions(exp[3], datai, dataf, main_folder)
@@ -70,9 +68,10 @@ def calc_histogram(data, bins):
   # plot the histrogram
   sys.exit()
 
-def calcInversions(exp, datai, dataf, main_folder):
+def calcInversions(exp, datai, dataf, main_folder, sea_mask):
 
   deltaT_l = []
+  deltaT_s = []
   for year in range(datai, dataf+1):
 
       for month in range(1,13):
@@ -93,15 +92,22 @@ def calcInversions(exp, datai, dataf, main_folder):
           lons2d, lats2d = r.get_longitudes_and_latitudes_for_the_last_read_rec() 
 
           deltaT[lats2d < 64.] = np.nan
-          aux = deltaT.flatten()
+          deltaT_land = deltaT.copy()
+          deltaT_sea = deltaT.copy()
+          deltaT_land[sea_mask == 0] = np.nan
+          deltaT_sea[sea_mask == 1] = np.nan
+
+          aux = deltaT_land.flatten()
           deltaT_l.extend(aux[~np.isnan(aux)].tolist())
+
+          aux = deltaT_sea.flatten()
+          deltaT_s.extend(aux[~np.isnan(aux)].tolist())
           #print(deltaT_l)
           #print(len(deltaT_l))
                   
       #print(deltaT_l)
       #print(len(deltaT_l))
 
-  return deltaT_l
-
+  return deltaT_l, deltaT_s
 if __name__ == "__main__":
     main()
