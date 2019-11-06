@@ -25,9 +25,7 @@ args=parser.parse_args()
 exp = args.exp
 exp = 'PanArctic_0.5d_CanHisto_NOCTEM_RUN'
 
-def main(exp):
-
-    print("hello world")
+def main(exp):    
 
     main_folder = "/home/cruman/projects/rrg-sushama-ab/teufel/{0}".format(exp)
 
@@ -43,6 +41,8 @@ def main(exp):
         # open dp file
         arq_dp = "{0}/Diagnostics/{1}_{2}{3:02d}/dp{1}_{2}{3:02d}_moyenne".format(main_folder, exp, year, month)
 
+        print(arq_dp)
+
         #read the file, extract temperature from 2 levels and calculate the difference for the points where lat > 64
         with RPN(arq_dp) as r:
 
@@ -57,9 +57,12 @@ def main(exp):
           aux = deltaT.flatten()
           deltaT_l.append(aux[~np.isnan(aux)])
           print(deltaT_l)
+          print(len(deltaT_l))
           
-        sys.exit()
-        print(deltaT_l)
+        
+      print(deltaT_l)
+      print(len(deltaT_l))
+      sys.exit()
           
 
         #store the data to create the histogram at the end of the loop
