@@ -47,7 +47,9 @@ def main(exp):
           t2m = np.squeeze(r.variables["TT"][:])
           t2 = r.variables["TT"]
           print(t2m.shape)
+          print(t2m[:,64,64])
           print([lev for lev in t2.sorted_levels])
+          sys.exit()
           #deltaT = t2m
 
         #store the data to create the histogram at the end of the loop
