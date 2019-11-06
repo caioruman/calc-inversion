@@ -30,8 +30,7 @@ import argparse
 
 def main():    
 
-    main_folder = "/home/cruman/projects/rrg-sushama-ab/teufel/{0}".format(exp)
-
+    
     exp = ['PanArctic_0.5d_CanHisto_NOCTEM_RUN', 'PanArctic_0.5d_CanHisto_NOCTEM_R2', 'PanArctic_0.5d_CanHisto_NOCTEM_R3',
        'PanArctic_0.5d_CanHisto_NOCTEM_R5', 'PanArctic_0.5d_CanHisto_NOCTEM_R4']
 
@@ -40,6 +39,7 @@ def main():
     
     deltaT_l = []
 
+    main_folder = "/home/cruman/projects/rrg-sushama-ab/teufel/{0}".format(exp[0])
     deltaT_R1 = calcInversions(exp[0], datai, dataf, main_folder)
     #deltaT_R2 = calcInversions(exp[1], datai, dataf, main_folder)
     #deltaT_R3 = calcInversions(exp[2], datai, dataf, main_folder)
