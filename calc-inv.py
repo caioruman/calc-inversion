@@ -55,7 +55,7 @@ def main(exp):
 
           deltaT[lats2d < 64] = np.nan
           aux = deltaT.flatten()
-          deltaT_l.append(aux[~np.isnan(aux)])
+          deltaT_l.append(aux[~np.isnan(aux)].tolist())
           print(deltaT_l)
           print(len(deltaT_l))
           
