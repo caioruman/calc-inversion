@@ -46,7 +46,7 @@ def main():
     
 
     main_folder = "/home/cruman/projects/rrg-sushama-ab/teufel/{0}".format(exp[0])
-    deltaT_R1 = calcInversions(exp[0], datai, dataf, main_folder, sea_mask)
+    deltaT_R1_l, deltaT_R1_s = calcInversions(exp[0], datai, dataf, main_folder, sea_mask)
     #deltaT_R2 = calcInversions(exp[1], datai, dataf, main_folder)
     #deltaT_R3 = calcInversions(exp[2], datai, dataf, main_folder)
     #deltaT_R4 = calcInversions(exp[3], datai, dataf, main_folder)
@@ -56,7 +56,10 @@ def main():
 
     bins = np.arange(-20,21,1)
 
-    calc_histogram(deltaT_R1, bins)
+    calc_histogram(deltaT_R1_l, bins)
+    calc_histogram(deltaT_R1_s, bins)
+
+    sys.exit()
 
 
 def calc_histogram(data, bins):
@@ -66,7 +69,7 @@ def calc_histogram(data, bins):
   print(hist)
 
   # plot the histrogram
-  sys.exit()
+  
 
 def calcInversions(exp, datai, dataf, main_folder, sea_mask):
 
