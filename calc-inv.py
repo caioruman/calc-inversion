@@ -46,9 +46,17 @@ def main(exp):
 
           t2m = np.squeeze(r.variables["TT"][:])
           t2 = r.variables["TT"]
-          print(t2m.shape)
-          print(t2m[:,64,64])
-          print([lev for lev in t2.sorted_levels])
+
+          deltaT = t2m[-4,:,:] - t2m[-1,:,:]
+
+          lons2d, lats2d = r.get_longitudes_and_latitudes_for_the_last_read_rec() 
+
+          deltaT[lats2d < 64] = np.nan
+
+          print(deltaT)
+          #print(t2m.shape)
+          #print(t2m[:,64,64])
+          #print([lev for lev in t2.sorted_levels])
           sys.exit()
           #deltaT = t2m
 
