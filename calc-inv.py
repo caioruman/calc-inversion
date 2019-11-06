@@ -34,6 +34,8 @@ def main(exp):
     datai = 1976
     dataf = 2005
     
+    deltaT_l = []
+
     for year in range(datai, dataf+1):
 
       for month in range(1,13):
@@ -52,13 +54,13 @@ def main(exp):
           lons2d, lats2d = r.get_longitudes_and_latitudes_for_the_last_read_rec() 
 
           deltaT[lats2d < 64] = np.nan
-
-          print(deltaT)
-          #print(t2m.shape)
-          #print(t2m[:,64,64])
-          #print([lev for lev in t2.sorted_levels])
-          sys.exit()
-          #deltaT = t2m
+          aux = deltaT.flatten()
+          deltaT_l.append(aux[~np.isnan(aux)])
+          print(deltaT_l)
+          
+        sys.exit()
+        print(deltaT_l)
+          
 
         #store the data to create the histogram at the end of the loop
     
