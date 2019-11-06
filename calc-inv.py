@@ -95,4 +95,4 @@ def calcInversions(exp, datai, dataf, main_folder):
       return deltaT_l
 
 if __name__ == "__main__":
-    main(exp)
+    main()
