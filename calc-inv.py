@@ -11,6 +11,7 @@ from rpn import level_kinds
 
 from netCDF4 import Dataset
 import time
+import argparse
 
 '''
     Using the
@@ -44,7 +45,9 @@ def main(exp):
         with RPN(arq_dp) as r:
 
           t2m = np.squeeze(r.variables["TT"][:])
-          print(t2m.shape)          
+          t2 = r.variables["TT"]
+          print(t2m.shape)
+          print([lev for lev in t2.sorted_levels])
           #deltaT = t2m
 
         #store the data to create the histogram at the end of the loop
