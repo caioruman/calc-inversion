@@ -37,6 +37,16 @@ def main():
     datai = 1976
     dataf = 2005    
 
+    arq_sea_mask = '/home/cruman/projects/rrg-sushama-ab/teufel/PanArctic_0.5d_ERAINT_NOCTEM_RUN/Analysis/anal_PanArctic_0.5d_ERAINT_NOCTEM_RUN_1980010100'
+
+    with RPN(arq_sea_mask) as r:
+      sea_mask = np.squeeze(r.variables["I6"][:]) # values == 0 equals the sea
+
+    print(sea_mask.shape)
+    sea_mask[sea_mask > 0] = 1
+    print(sea_mask)
+    sys.exit()
+
     main_folder = "/home/cruman/projects/rrg-sushama-ab/teufel/{0}".format(exp[0])
     deltaT_R1 = calcInversions(exp[0], datai, dataf, main_folder)
     #deltaT_R2 = calcInversions(exp[1], datai, dataf, main_folder)
