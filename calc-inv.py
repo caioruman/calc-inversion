@@ -35,9 +35,7 @@ def main():
        'PanArctic_0.5d_CanHisto_NOCTEM_R5', 'PanArctic_0.5d_CanHisto_NOCTEM_R4']
 
     datai = 1976
-    dataf = 2005
-    
-    deltaT_l = []
+    dataf = 2005    
 
     main_folder = "/home/cruman/projects/rrg-sushama-ab/teufel/{0}".format(exp[0])
     deltaT_R1 = calcInversions(exp[0], datai, dataf, main_folder)
@@ -64,6 +62,7 @@ def calc_histogram(data, bins):
 
 def calcInversions(exp, datai, dataf, main_folder):
 
+  deltaT_l = []
   for year in range(datai, dataf+1):
 
       for month in range(1,13):
@@ -92,7 +91,7 @@ def calcInversions(exp, datai, dataf, main_folder):
       #print(deltaT_l)
       #print(len(deltaT_l))
 
-      return deltaT_l
+  return deltaT_l
 
 if __name__ == "__main__":
     main()
